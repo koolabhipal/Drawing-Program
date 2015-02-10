@@ -1,3 +1,5 @@
+package com.drawing;
+
 import com.drawing.Canvas;
 import org.junit.Assert;
 import org.junit.Test;
