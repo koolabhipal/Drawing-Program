@@ -1,6 +1,8 @@
 package com.drawing;
 
 import com.drawing.Canvas;
+import com.drawing.model.Line;
+import com.drawing.model.Rectangle;
 import org.junit.Assert;
 import org.junit.Test;
 import org.powermock.reflect.Whitebox;
@@ -35,7 +37,8 @@ public class CanvasTest {
         Integer y1 = 6;
         Integer x2 = 3;
         Integer y2 = 38;
-        canvas.drawLine(x1, y1, x2, y2);
+        Line line = new Line(x1, y1, x2, y2);
+        canvas.draw(line);
         char[][] canvasState = Whitebox.getInternalState(canvas, "canvasState");
         testHorizontalLineExistence(canvasState[x1], y1, y2);
     }
@@ -60,7 +63,8 @@ public class CanvasTest {
         Integer y1 = 6;
         Integer x2 = 33;
         Integer y2 = 38;
-        canvas.drawRectangle(x1, y1, x2, y2);
+        Rectangle rectangle = new Rectangle(x1, y1, x2, y2);
+        canvas.draw(rectangle);
         char[][] canvasState = Whitebox.getInternalState(canvas, "canvasState");
         testHorizontalLineExistence(canvasState[x1], y1, y2);
         testHorizontalLineExistence(canvasState[x2], y1, y2);
@@ -71,7 +75,8 @@ public class CanvasTest {
     @Test
     public void testFillArea() {
         Canvas canvas = new Canvas(50, 60);
-        canvas.drawRectangle(3, 6, 33, 38);
+        Rectangle rectangle = new Rectangle(3, 6, 33, 38);
+        canvas.draw(rectangle);
         canvas.paintCanvas(7, 7, 'O');                      // (7,7) being a point inside the drawn rectangle
         char[][] canvasState = Whitebox.getInternalState(canvas, "canvasState");
         Assert.assertEquals(canvasState[15][15], 'O');      // (15,15) is also a point inside the rectangle so should be filled with 'O'

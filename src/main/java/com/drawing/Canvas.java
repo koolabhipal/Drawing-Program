@@ -1,5 +1,7 @@
 package com.drawing;
 
+import com.drawing.model.Shape;
+
 /**
  * @author Abhishek Pal
  */
@@ -17,47 +19,26 @@ public class Canvas {
         createNewCanvas();
     }
 
-    public void drawLine(Integer x1, Integer y1, Integer x2, Integer y2) {
-        if (!x1.equals(x2) && !y1.equals(y2)) {
-            System.out.print("Only vertical and horizontal lines are supported!!\n");
-            return;
-        }
-        if (y1 > height - 1 || x1 > width - 1 || y2 > height - 1 || x2 > width - 1) {
-            System.out.print("Coordinates exceeds the canvas size!!\n");
-            return;
-        }
-        if (x1.equals(x2)) {
-            for (int i = y1; i < y2; i++) {
-                canvasState[x1][i] = 'x';
-            }
-        } else {
-            for (int i = x1; i < x2; i++) {
-                canvasState[i][y1] = 'x';
-            }
-        }
-        drawCompleteCanvas();
-    }
-
-    public void drawRectangle(Integer x1, Integer y1, Integer x2, Integer y2) {
-        if (y1 > height - 1 || x1 > width - 1 || y2 > height - 1 || x2 > width - 1) {
-            System.out.print("Coordinates exceeds the canvas size!!\n");
-            return;
-        }
-
-        for (int i = y1; i < y2; i++) {
-            canvasState[x1][i] = 'x';
-            canvasState[x2][i] = 'x';
-        }
-        for (int i = x1; i < x2; i++) {
-            canvasState[i][y1] = 'x';
-            canvasState[i][y2] = 'x';
-        }
-        drawCompleteCanvas();
+    public void draw(Shape shape){
+        shape.draw(this);
+        displayCompleteCanvas();
     }
 
     public void paintCanvas(Integer x, Integer y, char fillCharacter) {
         fillCanvas(x, y, fillCharacter);
-        drawCompleteCanvas();
+        displayCompleteCanvas();
+    }
+
+    public char[][] getCanvasState() {
+        return canvasState;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getHeight() {
+        return height;
     }
 
     private void initBlankCanvas() {
@@ -68,7 +49,7 @@ public class Canvas {
         }
     }
 
-    private void drawCompleteCanvas() {
+    private void displayCompleteCanvas() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 System.out.print(canvasState[i][j]);
@@ -86,7 +67,7 @@ public class Canvas {
             canvasState[0][i] = '-';
             canvasState[width - 1][i] = '-';
         }
-        drawCompleteCanvas();
+        displayCompleteCanvas();
     }
 
     private void fillCanvas(Integer x, Integer y, char fillCharacter) {

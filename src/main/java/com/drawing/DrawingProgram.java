@@ -1,5 +1,7 @@
 package com.drawing;
 
+import com.drawing.model.Line;
+import com.drawing.model.Rectangle;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 
@@ -45,14 +47,16 @@ public class DrawingProgram {
                         System.out.println("Create Canvas first!!");
                         break;
                     }
-                    canvas.drawLine(Integer.valueOf(inputs.get(1)), Integer.valueOf(inputs.get(2)), Integer.valueOf(inputs.get(3)), Integer.valueOf(inputs.get(4)));
+                    Line line = new Line(Integer.valueOf(inputs.get(1)), Integer.valueOf(inputs.get(2)), Integer.valueOf(inputs.get(3)), Integer.valueOf(inputs.get(4)));
+                    canvas.draw(line);
                     break;
                 case 'R':
                     if (canvas == null) {
                         System.out.println("Create Canvas first!!");
                         break;
                     }
-                    canvas.drawRectangle(Integer.valueOf(inputs.get(1)), Integer.valueOf(inputs.get(2)), Integer.valueOf(inputs.get(3)), Integer.valueOf(inputs.get(4)));
+                    Rectangle rectangle = new Rectangle(Integer.valueOf(inputs.get(1)), Integer.valueOf(inputs.get(2)), Integer.valueOf(inputs.get(3)), Integer.valueOf(inputs.get(4)));
+                    canvas.draw(rectangle);
                     break;
                 case 'B':
                     if (canvas == null) {
